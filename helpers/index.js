@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
+const { HTTP } = require('../constantes');
 
 async function decodeToken(token) {
     const key = config.app.secretKey;
@@ -8,19 +9,31 @@ async function decodeToken(token) {
             if (err) {
                 reject(err);
             } else {
-                resolve(deoced);
+                resolve(decoded);
             }
         })
     });
 }
 
+function asyncErrorHandler(func) {
+    return async function(req, res, next) {
+        try {
+            await func(req, res, next);
+        } catch (err) {
+            console.log(err);
+            next(new CustomError(err.statusCode));
+        }
+    }
+}
+
 class CustomError {
-    constructors(code) {
-        this.code = code;
+    constructor(code) {
+        this.code = code || HTTP.INTERNAL_SERVER_ERROR;
     }
 }
 
 module.exports = {
     decodeToken,
+    asyncErrorHandler,
     CustomError
 };

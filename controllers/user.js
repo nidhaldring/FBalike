@@ -1,15 +1,16 @@
 
 const userServices = require('../services/user');
+const { asyncErrorHandler } = require('../helpers');
 const { HTTP }  = require('../constantes');
 
-const createUser = async (req, res) => {
+const createUser = asyncErrorHandler(async (req, res) => {
     const user = await userServices.createUser(req.body);
     res.json({
         username: user.username
     });
-}
+});
 
-const updateMyProfile = async (req, res) => {
+const updateMyProfile = asyncErrorHandler(async (req, res) => {
     if (req.user) {
         const user = await userServices.updateMyProfile
         res.json({
@@ -19,7 +20,7 @@ const updateMyProfile = async (req, res) => {
     } else {
         res.status(HTTP.UNAUTHORIZED).json({})
     }
-}
+});
 
 
 module.exports = {

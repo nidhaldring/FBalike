@@ -9,7 +9,7 @@ const {
     checkAuth
 } = require('../middlewares');
 
-router.post('/', checkAuth, createUser);
+router.post('/', createUser); // add checkAuth later to this
 router.patch('/', checkAuth, updateMyProfile);
 
 module.exports = router;

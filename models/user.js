@@ -1,5 +1,7 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
 
 const UserSchema = new Schema({
     username: {
@@ -28,5 +30,17 @@ UserSchema.pre('save', async function() {
     }
 });
 
+// set up methods
+UserSchema.methods.verifyPassword = async function(password) {
+    // TODO: consider when user is not saved yet !
+    return bcrypt.compare(password, this.password);
+}
+
+UserSchema.methods.generateJWT = async function() {
+    const key = config.app.secretKey;
+    // change this to be async in any way
+    // thou it doens't seem to support it for some reason !
+    return jwt.sign({ uid: this._id }, key);
+}
 
 module.exports = model('User', UserSchema, 'users');

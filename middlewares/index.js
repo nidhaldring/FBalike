@@ -6,36 +6,30 @@ const { decodeToken, CustomError } = require('../helpers');
 const { HTTP } = require('../constantes');
 
 function logAllRequests(req, res, next) {
-    console.log(chalk `{red.bold ${req.method}} to {blue ${req.url}}`);
+    console.log(chalk `{red.bold ${req.method}} {blue.bold ${req.url}}`);
     next();
 }
 
 async function checkAuth(req, res, next) {
      try {
         const token = await decodeToken(req.cookies.jwt);
+        console.log('this is ' + token);
         req.user = await User.findOne().lean();
         next();
     } catch (err) {
+        console.log();
         next(new CustomError(HTTP.UNAUTHORIZED));
     }
 }
 
-function errorHandler(func) {
-    return async function(req, res, next) {
-        try {
-            await func(req, res, next);
-        } catch (err) {
-            next(new CustomError(err.code));
-        }
-    }
-}
 
 function handleErrors(err, req, res, next) {
+    console.log(err);
     res.status(err.code).json({});
 }
 
 module.exports = {
     checkAuth,
     logAllRequests,
-    errorHandler
+    handleErrors
 };
