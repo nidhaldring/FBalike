@@ -1,7 +1,7 @@
 
 const { findUser, createUser } = require('../services/user');
 const { asyncErrorHandler, CustomError } = require('../helpers');
-const { HTTP } = require('../config');
+const { HTTP } = require('../constantes');
 
 const login = asyncErrorHandler(async (req, res, next) => {
     const foundUser = await findUser(req.body.email, req.body.password);

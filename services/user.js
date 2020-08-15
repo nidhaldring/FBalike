@@ -6,11 +6,12 @@ const createUser = async (userBody) => {
     return user.save();
 }
 
-const updateProfile = async (userId, newBody) => {
-    return User.findOne({ _id: userId })
-        .exec()
-        .updateOne(userBody)
-        .lean();
+const updateMyProfile = async (userId, newBody) => {
+    const user = await User.findById(userId).exec();
+    for (const key of Object.keys(newBody)) {
+        user[key] = newBody[key];
+    }
+    return await user.save();
 }
 
 const findUser = async (email, password) => {
@@ -20,6 +21,6 @@ const findUser = async (email, password) => {
 
 module.exports = {
     createUser,
-    updateProfile,
+    updateMyProfile,
     findUser
 };

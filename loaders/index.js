@@ -1,8 +1,9 @@
 const express = require('express');
-const cookieParser = require('cookie-parser');
 const { logAllRequests, handleErrors } = require('../middlewares');
 const config = require('../config');
 const mongoose = require('mongoose');
+const jsDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
 
 async function connectToDB() {
     const dbUrl = config.db.url;
@@ -23,14 +24,17 @@ function loadApp() {
 
     // set up middlewares
     app.use(express.json());
-    app.use(cookieParser());
     app.use(logAllRequests);
 
     // set up routes
     app.use('/api/user', require('../routes/user'));
     app.use('/api/auth', require('../routes/auth'));
 
-    app.all('*', (req, res) => res.end('ok !'));
+    // set up swagger-ui
+    const swaggerDoc = jsDoc(config.swagger);
+    app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
+
+    app.all('*', (req, res) => res.status(404).end('not found !'));
     // handle all errors here
     app.use(handleErrors);
 

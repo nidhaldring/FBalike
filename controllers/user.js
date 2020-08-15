@@ -12,13 +12,13 @@ const createUser = asyncErrorHandler(async (req, res) => {
 
 const updateMyProfile = asyncErrorHandler(async (req, res) => {
     if (req.user) {
-        const user = await userServices.updateMyProfile
+        const user = await userServices.updateMyProfile(req.user._id, req.body);
         res.json({
             email: user.email,
             username: user.username
         });
     } else {
-        res.status(HTTP.UNAUTHORIZED).json({})
+        res.status(HTTP.UNAUTHORIZED).json({});
     }
 });
 

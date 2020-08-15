@@ -28,7 +28,7 @@ function asyncErrorHandler(func) {
 
 class CustomError {
     constructor(code) {
-        this.code = code || HTTP.INTERNAL_SERVER_ERROR;
+        this.code = code || HTTP.ERROR;
     }
 }
 

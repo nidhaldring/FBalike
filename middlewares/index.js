@@ -12,12 +12,12 @@ function logAllRequests(req, res, next) {
 
 async function checkAuth(req, res, next) {
      try {
-        const token = await decodeToken(req.cookies.jwt);
-        console.log('this is ' + token);
-        req.user = await User.findOne().lean();
+        const token = req.get('Authorization').split(' ')[1];
+        const decoded = await decodeToken(token);
+        req.user = await User.findOne({ _id: decoded.uid }).lean();
         next();
     } catch (err) {
-        console.log();
+        console.log(err);
         next(new CustomError(HTTP.UNAUTHORIZED));
     }
 }
