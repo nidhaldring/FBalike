@@ -1,7 +1,52 @@
 [
     {
+        "_id": "5f382bcf9e0d4f524f4b627c",
         "password": "12345678",
         "username": "nidhal",
-        "email": "nidhal@nidhaled.com"
+        "email": "nidhal@nidhaled.com",
+        "followers": [
+            "5f382bcf9e0d4f524f4b6277",
+            "5f382bcf9e0d4f524f4b6227"
+        ],
+        "followings": [
+            "5f382bcf9e0d4f524f4b6277"
+        ]
+    },
+    {
+        "_id": "5f382bcf9e0d4f524f4b6277",
+        "password": "12345678",
+        "username": "nidhal1",
+        "email": "bouth@nidhaled.com",
+        "followers": [
+            "5f382bcf9e0d4f524f4b6227"
+        ],
+        "followings": [
+            "5f382bcf9e0d4f524f4b6227",
+            "52382bcf9e0d4f524f4b6277"
+        ]
+    },
+    {
+        "_id": "5f382bcf9e0d4f524f4b6227",
+        "password": "12345678",
+        "username": "bouth",
+        "email": "nid@nidhaled.com",
+        "followers": [
+
+        ],
+        "followings": [
+
+        ]
+    },
+    {
+        "_id": "52382bcf9e0d4f524f4b6277",
+        "password": "12345678",
+        "username": "nidhal12",
+        "email": "boutha@nidhaled.com",
+        "followers": [
+
+        ],
+        "followings": [
+            "5f382bcf9e0d4f524f4b6227"
+        ]
     }
 ]

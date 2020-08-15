@@ -8,8 +8,6 @@ const login = asyncErrorHandler(async (req, res, next) => {
     if (foundUser) {
         console.log(foundUser);
         const jwt = await foundUser.generateJWT();
-        console.log(jwt);
-        console.log("ok");
         res.json({ jwt });
     } else {
         next(new CustomError(HTTP.UNAUTHORIZED));
@@ -24,7 +22,7 @@ const register =  asyncErrorHandler(async (req, res, next) => {
     } = req.body;
     // TODO: return proper http status code here for duplicate email
     const user = await createUser({ email, username, password });
-    res.json({ email, username });
+    res.status(HTTP.CREATED).json({ email, username });
 });
 
 module.exports = {

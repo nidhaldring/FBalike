@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
@@ -19,7 +19,19 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         minLength: 6
-    }
+    },
+    followers: [
+        {
+        type: Types.ObjectId,
+        ref: 'User'
+        }
+    ],
+    followings: [
+        {
+        type: Types.ObjectId,
+        ref: 'User'
+        }
+    ]
 });
 
 
@@ -42,5 +54,10 @@ UserSchema.methods.generateJWT = async function() {
     // thou it doens't seem to support it for some reason !
     return jwt.sign({ uid: this._id }, key);
 }
+
+// UserSchema.methods.follow = async function(userId) {
+//     this.following.push(userId);
+//     return await this.save();
+// }
 
 module.exports = model('User', UserSchema, 'users');

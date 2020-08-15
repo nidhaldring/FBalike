@@ -2,6 +2,13 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const { HTTP } = require('../constantes');
 
+function removeFromArray(arr, value) {
+    const index = arr.indexOf(value);
+    if (index > -1) {
+        arr.splice(index, 1);
+    }
+}
+
 async function decodeToken(token) {
     const key = config.app.secretKey;
     return new Promise((resolve, reject) => {
@@ -35,5 +42,6 @@ class CustomError {
 module.exports = {
     decodeToken,
     asyncErrorHandler,
+    removeFromArray,
     CustomError
 };

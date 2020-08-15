@@ -27,6 +27,7 @@ function loadApp() {
     app.use(logAllRequests);
 
     // set up routes
+    app.use('/api/user/follower', require('../routes/follower'));
     app.use('/api/user', require('../routes/user'));
     app.use('/api/auth', require('../routes/auth'));
 
