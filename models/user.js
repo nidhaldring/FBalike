@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 
+require('./post');
+
 const UserSchema = new Schema({
     username: {
         type: String,
@@ -30,6 +32,12 @@ const UserSchema = new Schema({
         {
         type: Types.ObjectId,
         ref: 'User'
+        }
+    ],
+    posts: [
+        {
+            type: Types.ObjectId,
+            ref: 'Post'
         }
     ]
 });

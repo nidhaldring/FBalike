@@ -28,7 +28,7 @@ function asyncErrorHandler(func) {
             await func(req, res, next);
         } catch (err) {
             console.log(err);
-            next(new CustomError(err.statusCode));
+            next(new CustomError(err.statusCode || err.code));
         }
     }
 }

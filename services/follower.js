@@ -1,8 +1,12 @@
 const { User } = require('../models');
 const { removeFromArray } = require('../helpers');
 
-
 const followUser = async (followerId, followedId) => {
+    const followedFound = (await User.findById(followedId).exec()) !== null;
+    if (followedId === followerId || !followedFound) {
+        throw new CustomError(HTTP.ERROR);
+    }
+
     const follower = await User.findById(followerId);
     const followed = await User.findById(followedId);
 

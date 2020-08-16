@@ -8,10 +8,6 @@ const addFollower = asyncErrorHandler(async (req, res) => {
     const followedId = req.params.id;
     const user = req.user;
 
-    const followedFound = (await User.findById(followedId).exec()) !== null;
-    if (user._id === followedId || !followedFound) {
-        return next(new CustomError(HTTP.ERROR));
-    }
     await followUser(user._id, followedId);
 
     res.status(HTTP.CREATED).json({});

@@ -30,6 +30,7 @@ function loadApp() {
     app.use('/api/user/follower', require('../routes/follower'));
     app.use('/api/user', require('../routes/user'));
     app.use('/api/auth', require('../routes/auth'));
+    app.use('/api/post', require('../routes/post'));
 
     // set up swagger-ui
     const swaggerDoc = jsDoc(config.swagger);
