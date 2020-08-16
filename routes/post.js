@@ -4,7 +4,7 @@ const {
     createPost,
     deletePost,
     getPostById
-} = require('../services/post');
+} = require('../controllers/post');
 const { checkAuth } = require('../middlewares');
 
 
@@ -85,6 +85,7 @@ router.post('/', checkAuth, createPost);
  *          description: "Failure"
  *
  */
+// check for permission here and stuff
 router.delete('/:id', checkAuth, deletePost);
 
 

@@ -1,4 +1,4 @@
-const Post = require('../models');
+const { Post } = require('../models');
 const { CustomError } = require('../helpers');
 const { HTTP } = require('../constantes');
 

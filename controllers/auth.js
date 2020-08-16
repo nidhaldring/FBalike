@@ -6,7 +6,6 @@ const { HTTP } = require('../constantes');
 const login = asyncErrorHandler(async (req, res, next) => {
     const foundUser = await findUser(req.body.email, req.body.password);
     if (foundUser) {
-        console.log(foundUser);
         const jwt = await foundUser.generateJWT();
         res.json({ jwt });
     } else {
