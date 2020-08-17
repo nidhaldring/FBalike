@@ -22,6 +22,7 @@ async function decodeToken(token) {
     });
 }
 
+// use this so that you want writr try - catch in every async controller
 function asyncErrorHandler(func) {
     return async function(req, res, next) {
         try {

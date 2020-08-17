@@ -9,6 +9,16 @@ module.exports = {
         port: '5050',
         secretKey: '!!!!!!!!!!!!!!!!'
     },
+    mail: {
+        transporter: {
+            service: 'Hotmail',
+            auth: {
+                user: 'nidhaled@hotmail.com',
+                pass: 'nh_66@1973465n'
+            }
+        },
+        from: 'nidhaled@hotmail.com'
+    },
     swagger: {
         swaggerDefinition: {
             openapi: '3.0.0',

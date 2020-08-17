@@ -1,6 +1,7 @@
 
 const { findUser, createUser } = require('../services/user');
 const { asyncErrorHandler, CustomError } = require('../helpers');
+const {sendMail, getWelcomeMail } = require('../helpers/email');
 const { HTTP } = require('../constantes');
 
 const login = asyncErrorHandler(async (req, res, next) => {
@@ -22,6 +23,8 @@ const register =  asyncErrorHandler(async (req, res, next) => {
     // TODO: return proper http status code here for duplicate email
     const user = await createUser({ email, username, password });
     res.status(HTTP.CREATED).json({ email, username });
+
+    await sendMail(await getWelcomeMail(user));
 });
 
 module.exports = {
