@@ -11,7 +11,7 @@ const { checkAuth } = require('../middlewares');
 /**
  * @swagger
  * path:
- *  /post/{id}:
+ *  /posts/{id}:
  *    get:
  *      summary: get post
  *      tags: [Post]
@@ -36,7 +36,7 @@ router.get('/:id', checkAuth, getPostById);
 /**
  * @swagger
  * path:
- *  /post:
+ *  /posts:
  *    post:
  *      summary: create post
  *      tags: [Post]
@@ -65,7 +65,7 @@ router.post('/', checkAuth, createPost);
 /**
  * @swagger
  * path:
- *  /post/{id}:
+ *  /posts/{id}:
  *    delete:
  *      summary: delete post
  *      tags: [Post]

@@ -1,14 +1,9 @@
 
 const jwt = require('jsonwebtoken');
-const chalk = require('chalk');
 const { User } = require('../models');
 const { decodeToken, CustomError } = require('../helpers');
 const { HTTP } = require('../constantes');
 
-function logAllRequests(req, res, next) {
-    console.log(chalk `{red.bold ${req.method}} {blue.bold ${req.url}}`);
-    next();
-}
 
 async function checkAuth(req, res, next) {
      try {
@@ -30,6 +25,5 @@ function handleErrors(err, req, res, next) {
 
 module.exports = {
     checkAuth,
-    logAllRequests,
     handleErrors
 };

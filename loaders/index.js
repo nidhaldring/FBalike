@@ -1,5 +1,6 @@
 const express = require('express');
-const { logAllRequests, handleErrors } = require('../middlewares');
+const morgan = require('morgan');
+const { handleErrors } = require('../middlewares');
 const config = require('../config');
 const mongoose = require('mongoose');
 const jsDoc = require('swagger-jsdoc');
@@ -19,18 +20,18 @@ async function connectToDB() {
     });
 }
 
-function loadApp() {
+async function runApp() {
     const app = express();
 
     // set up middlewares
     app.use(express.json());
-    app.use(logAllRequests);
+    app.use(morgan('dev'));
 
     // set up routes
-    app.use('/api/user/follower', require('../routes/follower'));
-    app.use('/api/user', require('../routes/user'));
+    app.use('/api/users/followers', require('../routes/follower'));
+    app.use('/api/users', require('../routes/user'));
     app.use('/api/auth', require('../routes/auth'));
-    app.use('/api/post', require('../routes/post'));
+    app.use('/api/posts', require('../routes/post'));
 
     // set up swagger-ui
     const swaggerDoc = jsDoc(config.swagger);
@@ -40,11 +41,14 @@ function loadApp() {
     // handle all errors here
     app.use(handleErrors);
 
-    return app;
+    await connectToDB();
+    
+    return app.listen(config.app.port, () => {
+        console.log(`Up and running on ${config.app.port} !`);
+    });
 }
 
 
 module.exports = {
-    loadApp,
-    connectToDB
+    runApp
 };

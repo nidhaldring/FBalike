@@ -7,7 +7,7 @@ const { checkAuth } = require('../middlewares');
 /**
  * @swagger
  * path:
- *  /user/follower/{id}:
+ *  /users/followers/{id}:
  *    post:
  *      summary: follow user
  *      tags: [Follower]
@@ -32,7 +32,7 @@ router.post('/:id', checkAuth, addFollower);
 /**
  * @swagger
  * path:
- *  /user/follower/{id}:
+ *  /users/followers/{id}:
  *    delete:
  *      summary: unfollow user
  *      tags: [Follower]
