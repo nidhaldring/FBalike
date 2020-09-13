@@ -12,8 +12,8 @@ export default {
         transporter: {
             service: 'Hotmail',
             auth: {
-                user: 'nidhaled@hotmail.com',
-                pass: 'nh_66@1973465n',
+                user: '',
+                pass: '',
             },
         },
         from: 'nidhaled@hotmail.com',
