@@ -1,13 +1,8 @@
+import { Router } from 'express';
+import { createUser, updateMyProfile } from '../controllers/user';
+import { checkAuth } from '../middlewares';
 
-const router = require('express').Router();
-const {
-    createUser,
-    updateMyProfile
-} = require('../controllers/user');
-
-const {
-    checkAuth
-} = require('../middlewares');
+const router = Router();
 
 // router.post('/', checkAuth, createUser); // add checkAuth later to this
 /**
@@ -41,4 +36,4 @@ const {
  */
 router.patch('/', checkAuth, updateMyProfile);
 
-module.exports = router;
+export default router;

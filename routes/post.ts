@@ -1,12 +1,12 @@
-
-const router = require('express').Router();
-const {
+import { Router } from 'express';
+import {
     createPost,
     deletePost,
     getPostById
-} = require('../controllers/post');
-const { checkAuth } = require('../middlewares');
+} from '../controllers/post';
+import { checkAuth } from '../middlewares';
 
+const router = Router();
 
 /**
  * @swagger
@@ -89,4 +89,4 @@ router.post('/', checkAuth, createPost);
 router.delete('/:id', checkAuth, deletePost);
 
 
-module.exports = router;
+export default router;

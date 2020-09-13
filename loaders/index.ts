@@ -1,22 +1,26 @@
-const express = require('express');
-const morgan = require('morgan');
-const { handleErrors } = require('../middlewares');
-const config = require('../config');
-const mongoose = require('mongoose');
-const jsDoc = require('swagger-jsdoc');
-const swaggerUI = require('swagger-ui-express');
+import express from 'express';
+import morgan from 'morgan';
+import { handleErrors } from '../middlewares';
+import config from '../config';
+import mongoose from 'mongoose';
+import jsDoc from 'swagger-jsdoc';
+import swaggerUI from 'swagger-ui-express';
 
-async function connectToDB() {
+async function connectToDB(): Promise<true> {
     const dbUrl = config.db.url;
     return new Promise((resolve, reject) => {
-        mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
-            if (err) {
-                reject(err);
-            } else {
-                console.log('connected to mongo ! ');
-                resolve(true);
+        mongoose.connect(
+            dbUrl,
+            { useNewUrlParser: true, useUnifiedTopology: true },
+            (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    console.log('connected to mongo ! ');
+                    resolve(true);
+                }
             }
-        });
+        );
     });
 }
 
@@ -42,13 +46,10 @@ async function runApp() {
     app.use(handleErrors);
 
     await connectToDB();
-    
+
     return app.listen(config.app.port, () => {
         console.log(`Up and running on ${config.app.port} !`);
     });
 }
 
-
-module.exports = {
-    runApp
-};
+export { runApp, connectToDB };

@@ -1,8 +1,8 @@
+import { Router } from 'express';
+import { addFollower, deleteFollower } from '../controllers/follower';
+import { checkAuth } from '../middlewares';
 
-const router = require('express').Router();
-const { addFollower, deleteFollower } = require('../controllers/follower');
-const { checkAuth } = require('../middlewares');
-
+const router = Router();
 
 /**
  * @swagger
@@ -54,4 +54,4 @@ router.post('/:id', checkAuth, addFollower);
  */
 router.delete('/:id', checkAuth, deleteFollower);
 
-module.exports = router;
+export default router;

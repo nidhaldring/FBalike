@@ -1,8 +1,9 @@
 
-const { asyncErrorHandler } = require('../helpers');
-const postServices = require('../services/post');
-const { CustomError } = require('../helpers');
-const { HTTP } = require('../constantes');
+import { asyncErrorHandler } from '../helpers';
+import * as postServices from '../services/post';
+import { CustomError } from '../helpers';
+import { HTTP } from '../constantes';
+import { User, Post } from '../models';
 
 
 const getPostById = asyncErrorHandler(async (req, res, next) => {
@@ -14,7 +15,9 @@ const getPostById = asyncErrorHandler(async (req, res, next) => {
 });
 
 const createPost = asyncErrorHandler(async (req, res) => {
-    const post = await postServices.createPost(req.user, req.body);
+    const author: User = req.user;
+    const body: Omit<Post, 'author'> = req.body;
+    const post = await postServices.createPost({author, ...body});
     res.status(HTTP.CREATED).json(post);
 });
 
@@ -23,7 +26,7 @@ const deletePost = asyncErrorHandler(async (req, res) => {
     res.json({});
 });
 
-module.exports = {
+export {
     getPostById,
     createPost,
     deletePost

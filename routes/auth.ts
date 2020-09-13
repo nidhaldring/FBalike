@@ -1,6 +1,9 @@
 
-const router = require('express').Router();
-const { login, register } = require('../controllers/auth');
+import { Router } from 'express';
+import { login, register } from '../controllers/auth';
+
+const router = Router();
+
 
 /**
  * @swagger
@@ -62,4 +65,4 @@ router.post('/login', login);
 router.post('/register', register)
 
 
-module.exports = router;
+export default router;

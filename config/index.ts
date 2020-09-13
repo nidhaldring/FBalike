@@ -1,23 +1,22 @@
-
 // maybe dvidie this later ?
 
-module.exports = {
+export default {
     db: {
-        url: 'mongodb://localhost/test'
+        url: 'mongodb://localhost/test',
     },
     app: {
         port: '5050',
-        secretKey: '!!!!!!!!!!!!!!!!'
+        secretKey: '!!!!!!!!!!!!!!!!',
     },
     mail: {
         transporter: {
             service: 'Hotmail',
             auth: {
                 user: 'nidhaled@hotmail.com',
-                pass: 'nh_66@1973465n'
-            }
+                pass: 'nh_66@1973465n',
+            },
         },
-        from: 'nidhaled@hotmail.com'
+        from: 'nidhaled@hotmail.com',
     },
     swagger: {
         swaggerDefinition: {
@@ -25,23 +24,23 @@ module.exports = {
             info: {
                 title: 'API',
                 version: '1.0.0',
-                description: 'FBAlike API'
+                description: 'FBAlike API',
             },
             servers: [
                 {
-                    url: 'http://localhost:5050/api/'
-                }
+                    url: 'http://localhost:5050/api/',
+                },
             ],
             components: {
                 securitySchemes: {
                     bearerAuth: {
                         type: 'http',
                         scheme: 'bearer',
-                        bearerFormat: 'JWT'
-                    }
-                }
-            }
+                        bearerFormat: 'JWT',
+                    },
+                },
+            },
         },
-        apis: ['./routes/*.js']
-    }
+        apis: ['./routes/*.js'],
+    },
 };

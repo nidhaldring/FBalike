@@ -1,8 +1,8 @@
 
-const { User } = require('../models');
-const { CustomError, asyncErrorHandler } = require('../helpers');
-const { HTTP } = require('../constantes');
-const { followUser, unfollowUser } = require('../services/follower');
+import { UserModel } from '../models';
+import { CustomError, asyncErrorHandler } from '../helpers';
+import { HTTP } from '../constantes';
+import { followUser, unfollowUser } from '../services/follower';
 
 const addFollower = asyncErrorHandler(async (req, res) => {
     const followedId = req.params.id;
@@ -13,11 +13,11 @@ const addFollower = asyncErrorHandler(async (req, res) => {
     res.status(HTTP.CREATED).json({});
 });
 
-const deleteFollower = asyncErrorHandler(async (req, res) => {
+const deleteFollower = asyncErrorHandler(async (req, res, next) => {
     const followedId = req.params.id;
     const user = req.user;
 
-    const followedFound = (await User.findById(followedId).exec()) !== null;
+    const followedFound = (await UserModel.findById(followedId).exec()) !== null;
     if (user._id === followedId || !followedFound) {
         return next(new CustomError(HTTP.ERROR));
     }
@@ -26,7 +26,7 @@ const deleteFollower = asyncErrorHandler(async (req, res) => {
     res.json({});
 });
 
-module.exports = {
+export {
     addFollower,
     deleteFollower
 };

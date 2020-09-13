@@ -1,7 +1,7 @@
 
-const userServices = require('../services/user');
-const { asyncErrorHandler } = require('../helpers');
-const { HTTP }  = require('../constantes');
+import * as userServices from '../services/user';
+import { asyncErrorHandler } from '../helpers';
+import { HTTP } from '../constantes';
 
 const createUser = asyncErrorHandler(async (req, res) => {
     const user = await userServices.createUser(req.body);
@@ -23,7 +23,7 @@ const updateMyProfile = asyncErrorHandler(async (req, res) => {
 });
 
 
-module.exports = {
+export {
     createUser,
     updateMyProfile
 };
